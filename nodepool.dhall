@@ -16,32 +16,13 @@ let ZookeeperServer = ./types/ZookeeperServer.dhall
 
 let Openstack = ./types/Openstack.dhall
 
-let Kubernetes = { Type = { name : Text }, default = {=} }
+let Kubernetes = ./types/Kubernetes.dhall
 
-let Static = { Type = { name : Text }, default = {=} }
+let Static = ./types/Static.dhall
 
-let {- The Union of nodepool resource provider
-    -} Provider =
-      < openstack : Openstack.Type
-      | kubernetes : Kubernetes.Type
-      | static : Static.Type
-      >
+let Provider = ./types/Provider.dhall
 
-let NodepoolConfig =
-      { Type =
-          { build-log-dir : Text
-          , build-log-retention : Natural
-          , diskimages : List DiskImage.Type
-          , elements-dir : Text
-          , images-dir : Text
-          , labels : List Label.Type
-          , max-hold-age : Natural
-          , webapp : WebApp.Type
-          , zookeeper-servers : List ZookeeperServer.Type
-          , providers : List Provider
-          }
-      , default = { build-log-retention = 7, max-hold-age = 0 }
-      }
+let NodepoolConfig = ./types/NodepoolConfig.dhall
 
 in  NodepoolConfig::{
     , webapp = WebApp::{ port = 8008 }
