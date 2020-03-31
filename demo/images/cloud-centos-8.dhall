@@ -9,5 +9,5 @@ in  { diskimage = Nodepool.DiskImage::{
           "/usr/bin/dib-virt-customize /etc/nodepool/virt_images/${name}.yaml"
       }
     , label = Nodepool.Label::{ name = "${name}", min-ready = Some 1 }
-    , provider = Nodepool.ProviderDiskImage::{ name = "${name}" }
+    , provider = Nodepool.OpenstackDiskImage::{ name = "${name}" }
     }

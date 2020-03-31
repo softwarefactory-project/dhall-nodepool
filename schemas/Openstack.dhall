@@ -14,9 +14,9 @@
     , rate : Optional Natural
     , clean-floating-ips : Optional Bool
     , port-cleanup-interval : Optional Natural
-    , diskimages : Optional (List (./ProviderDiskImage.dhall).Type)
-    , cloud-images : Optional (List (./ProviderCloudImage.dhall).Type)
-    , pools : Optional (List (./ProviderPool.dhall).Type)
+    , diskimages : Optional (List (./OpenstackDiskImage.dhall).Type)
+    , cloud-images : Optional (List (./OpenstackCloudImage.dhall).Type)
+    , pools : Optional (List (./OpenstackPool.dhall).Type)
     }
 , default =
     { cloud = None Text
@@ -33,8 +33,8 @@
     , rate = None Natural
     , clean-floating-ips = None Bool
     , port-cleanup-interval = None Natural
-    , diskimages = None (List (./ProviderDiskImage.dhall).Type)
-    , cloud-images = None (List (./ProviderCloudImage.dhall).Type)
-    , pools = None (List (./ProviderPool.dhall).Type)
+    , diskimages = None (List (./OpenstackDiskImage.dhall).Type)
+    , cloud-images = None (List (./OpenstackCloudImage.dhall).Type)
+    , pools = None (List (./OpenstackPool.dhall).Type)
     }
 }

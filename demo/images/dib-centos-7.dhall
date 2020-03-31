@@ -19,7 +19,7 @@ in  { diskimage = Nodepool.DiskImage::{
         ]
       }
     , label = Nodepool.Label::{ name = "${name}", min-ready = Some 1 }
-    , provider = Nodepool.ProviderDiskImage::{
+    , provider = Nodepool.OpenstackDiskImage::{
       , name = "${name}"
       , config-drive = Some True
       }

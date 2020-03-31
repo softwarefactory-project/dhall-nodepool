@@ -1,4 +1,4 @@
 < openstack : (./Openstack.dhall).Type
-| kubernetes : (./Kubernetes.dhall).Type
+| openshiftpods : (./Openshiftpods.dhall).Type
 | static : (./Static.dhall).Type
 >

@@ -3,7 +3,7 @@ let Nodepool = env:DHALL_NODEPOOL
 let OurImage =
       { diskimage : Nodepool.DiskImage.Type
       , label : Nodepool.Label.Type
-      , provider : Nodepool.ProviderDiskImage.Type
+      , provider : Nodepool.OpenstackDiskImage.Type
       }
 
 let mapImage = https://prelude.dhall-lang.org/List/map OurImage
@@ -18,9 +18,9 @@ in  { name = "${provider_name}"
     , rate = Some 1
     , diskimages = Some
         ( mapImage
-            Nodepool.ProviderDiskImage.Type
+            Nodepool.OpenstackDiskImage.Type
             (     \(image : OurImage)
-              ->  Nodepool.ProviderDiskImage::{
+              ->  Nodepool.OpenstackDiskImage::{
                   , name = image.provider.name
                   , config-drive = image.provider.config-drive
                   }
@@ -28,15 +28,15 @@ in  { name = "${provider_name}"
             ./images.dhall
         )
     , pools =
-      [ Nodepool.ProviderPool::{
+      [ Nodepool.OpenstackPool::{
         , name = "main"
         , max-servers = 25
         , networks = Some [ "public" ]
         , labels = Some
             ( mapImage
-                Nodepool.ProviderLabel.Type
+                Nodepool.OpenstackLabel.Type
                 (     \(image : OurImage)
-                  ->  Nodepool.ProviderLabel::{
+                  ->  Nodepool.OpenstackLabel::{
                       , name = image.label.name
                       , flavor-name = "nodepool-infra"
                       , diskimage = Some image.diskimage.name

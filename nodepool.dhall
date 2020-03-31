@@ -1,28 +1,28 @@
-let DiskImage = ./types/DiskImage.dhall
+let DiskImage = ./schemas/DiskImage.dhall
 
-let Label = ./types/Label.dhall
+let Label = ./schemas/Label.dhall
 
-let ProviderCloudImage = ./types/ProviderCloudImage.dhall
+let OpenstackCloudImage = ./schemas/Drivers/Openstack/CloudImage.dhall
 
-let ProviderDiskImage = ./types/ProviderDiskImage.dhall
+let OpenstackDiskImage = ./schemas/Drivers/Openstack/DiskImage.dhall
 
-let ProviderLabel = ./types/ProviderLabel.dhall
+let OpenstackLabel = ./schemas/Drivers/Openstack/Label.dhall
 
-let ProviderPool = ./types/ProviderPool.dhall
+let OpenstackPool = ./schemas/Drivers/Openstack/Pool.dhall
 
-let WebApp = ./types/WebApp.dhall
+let WebApp = ./schemas/WebApp.dhall
 
-let ZookeeperServer = ./types/ZookeeperServer.dhall
+let ZookeeperServer = ./schemas/ZookeeperServer.dhall
 
-let Openstack = ./types/Openstack.dhall
+let Openstack = ./schemas/Drivers/Openstack.dhall
 
-let Kubernetes = ./types/Kubernetes.dhall
+let OpenshiftPods = ./schemas/Drivers/OpenshiftPods.dhall
 
-let Static = ./types/Static.dhall
+let Static = ./schemas/Drivers/Static.dhall
 
-let Provider = ./types/Provider.dhall
+let Provider = ./schemas/Providers.dhall
 
-let NodepoolConfig = ./types/NodepoolConfig.dhall
+let NodepoolConfig = ./schemas/NodepoolConfig.dhall
 
 in  NodepoolConfig::{
     , webapp = WebApp::{ port = 8008 }
@@ -40,23 +40,38 @@ in  NodepoolConfig::{
           , rate = Some 1
           , hostname-format = Some "node-{node.id}"
           , diskimages = Some
-            [ ProviderDiskImage::{
+            [ OpenstackDiskImage::{
               , name = "cloud-centos-7"
               , config-drive = Some True
               }
             ]
           , pools = Some
-            [ ProviderPool::{
+            [ OpenstackPool::{
               , name = "main"
               , max-servers = 25
               , networks = Some [ "public" ]
               , labels = Some
-                [ ProviderLabel::{
+                [ OpenstackLabel::{
                   , name = "cloud-centos-7"
                   , flavor-name = "nodepool-infra"
                   , diskimage = Some "cloud-centos-7"
                   }
                 ]
+              }
+            ]
+          }
+      , Provider.openshiftpods
+          OpenshiftPods::{
+          , name = "managed-k1s-provider-k1s01"
+          , context = "/k1s-k1s01/managed"
+          , max-pods = Some 10
+          , pools = Some
+            [ (./schemas/Drivers/OpenshiftPods/Pools.dhall)::{
+              , name = "main"
+              , labels = Some
+                  ( [] : List
+                           (./schemas/Drivers/OpenshiftPods/Labels.dhall).Type
+                  )
               }
             ]
           }
