@@ -5,7 +5,7 @@ let List/map = https://prelude.dhall-lang.org/List/map
 let OurImage =
       { diskimage : Nodepool.DiskImage.Type
       , label : Nodepool.Label.Type
-      , provider : Nodepool.ProviderDiskImage.Type
+      , provider : Nodepool.OpenstackDiskImage.Type
       }
 
 in  List/map

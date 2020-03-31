@@ -1,37 +1,13 @@
-let DiskImage = ./types/DiskImage.dhall
+let Nodepool = ./package.dhall
 
-let Label = ./types/Label.dhall
-
-let ProviderCloudImage = ./types/ProviderCloudImage.dhall
-
-let ProviderDiskImage = ./types/ProviderDiskImage.dhall
-
-let ProviderLabel = ./types/ProviderLabel.dhall
-
-let ProviderPool = ./types/ProviderPool.dhall
-
-let WebApp = ./types/WebApp.dhall
-
-let ZookeeperServer = ./types/ZookeeperServer.dhall
-
-let Openstack = ./types/Openstack.dhall
-
-let Kubernetes = ./types/Kubernetes.dhall
-
-let Static = ./types/Static.dhall
-
-let Provider = ./types/Provider.dhall
-
-let NodepoolConfig = ./types/NodepoolConfig.dhall
-
-in  NodepoolConfig::{
-    , webapp = WebApp::{ port = 8008 }
-    , elements-dir = "/path/to/elements"
-    , images-dir = "/path/to/images"
-    , build-log-dir = "/path/to/build-logs"
-    , providers =
-      [ Provider.openstack
-          Openstack::{
+in  Nodepool.Config::{
+    , webapp = Some Nodepool.WebApp::{ port = 8008 }
+    , elements-dir = Some "/path/to/elements"
+    , images-dir = Some "/path/to/images"
+    , build-log-dir = Some "/path/to/build-logs"
+    , providers = Some
+      [ Nodepool.Providers.openstack
+          Nodepool.Openstack::{
           , name = "vexxhost-nodepool-sf"
           , cloud = Some "vexxhost-nodepool-sf"
           , clean-floating-ips = Some True
@@ -40,18 +16,18 @@ in  NodepoolConfig::{
           , rate = Some 1
           , hostname-format = Some "node-{node.id}"
           , diskimages = Some
-            [ ProviderDiskImage::{
+            [ Nodepool.OpenstackDiskImage::{
               , name = "cloud-centos-7"
               , config-drive = Some True
               }
             ]
           , pools = Some
-            [ ProviderPool::{
+            [ Nodepool.OpenstackPool::{
               , name = "main"
               , max-servers = 25
               , networks = Some [ "public" ]
               , labels = Some
-                [ ProviderLabel::{
+                [ Nodepool.OpenstackLabel::{
                   , name = "cloud-centos-7"
                   , flavor-name = "nodepool-infra"
                   , diskimage = Some "cloud-centos-7"
@@ -60,22 +36,39 @@ in  NodepoolConfig::{
               }
             ]
           }
+      , Nodepool.Providers.openshiftpods
+          Nodepool.Openshiftpods::{
+          , name = "managed-k1s-provider-k1s01"
+          , context = "/k1s-k1s01/managed"
+          , max-pods = Some 10
+          , pools = Some
+            [ Nodepool.OpenshiftpodsPools::{
+              , name = "main"
+              , labels = Some ([] : List Nodepool.OpenshiftpodsLabels.Type)
+              }
+            ]
+          }
       ]
-    , diskimages =
-      [ DiskImage::{
+    , diskimages = Some
+      [ Nodepool.DiskImage::{
         , name = "cloud-centos-8"
         , python-path = Some "/usr/bin/python3"
         , dib-cmd = Some
             "/usr/bin/dib-virt-customize /etc/nodepool/virt_images/cloud-centos-8.yaml"
         }
-      , DiskImage::{
+      , Nodepool.DiskImage::{
         , name = "dib-centos-7"
         , env-vars = Some (toMap { key1 = "value1", key2 = "value2" })
         , elements = Some [ "centos-minimal", "nodepool-minimal" ]
         }
       ]
-    , labels =
-      [ Label::{ name = "cloud-centos-7-vexxhost", min-ready = Some 1 } ]
+    , labels = Some
+      [ Nodepool.Label::{ name = "cloud-centos-7-vexxhost", min-ready = Some 1 }
+      ]
     , zookeeper-servers =
-      [ ZookeeperServer::{ host = "localhost", chroot = Some "/nodepool" } ]
+      [ Nodepool.ZookeeperServer::{
+        , host = "localhost"
+        , chroot = Some "/nodepool"
+        }
+      ]
     }

@@ -10,8 +10,8 @@
     , security-groups : Optional (List Text)
     , auto-floating-ip : Optional Bool
     , host-key-checking : Optional Bool
-    , diskimages : Optional (List (./ProviderDiskImage.dhall).Type)
-    , labels : Optional (List (./ProviderLabel.dhall).Type)
+    , diskimages : Optional (List (./OpenstackDiskImage.dhall).Type)
+    , labels : Optional (List (./OpenstackLabel.dhall).Type)
     }
 , default =
     { node-attributes = None (List { mapKey : Text, mapValue : Text })
@@ -24,7 +24,7 @@
     , security-groups = None (List Text)
     , auto-floating-ip = None Bool
     , host-key-checking = None Bool
-    , diskimages = None (List (./ProviderDiskImage.dhall).Type)
-    , labels = None (List (./ProviderLabel.dhall).Type)
+    , diskimages = None (List (./OpenstackDiskImage.dhall).Type)
+    , labels = None (List (./OpenstackLabel.dhall).Type)
     }
 }
