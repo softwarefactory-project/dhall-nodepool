@@ -1,0 +1,46 @@
+diskimages:
+  - elements:
+      - centos-minimal
+      - nodepool-minimal
+      - zuul-worker-user
+      - enforce-sshd-config
+      - rpm-factory
+      - ansible
+      - common-packages
+      - sf-ci-packages
+      - scl
+    formats:
+      - raw
+    name: dib-centos-7
+    username: zuul-worker
+  - dib-cmd: /usr/bin/dib-virt-customize /etc/nodepool/virt_images/cloud-centos-8.yaml
+    name: cloud-centos-8
+    python-path: /usr/bin/python3
+labels:
+  - name: dib-centos-7
+    min-ready: 1
+  - name: cloud-centos-8
+    min-ready: 1
+providers:
+  - boot-timeout: 120
+    clean-floating-ips: true
+    cloud: vexxhost-nodepool-sf
+    diskimages:
+      - name: dib-centos-7
+        config-drive: true
+      - name: cloud-centos-8
+    name:  vexxhost-nodepool-sf
+    pools:
+      - labels:
+          - name: dib-centos-7
+            flavor-name: 'nodepool-infra'
+            diskimage: dib-centos-7
+          - name: cloud-centos-8
+            flavor-name: 'nodepool-infra'
+            diskimage: cloud-centos-8
+        max-servers: 25
+        name: main
+        networks:
+          - public
+    rate: 1
+    region-name: RegionOne

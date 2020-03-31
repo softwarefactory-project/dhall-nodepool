@@ -1,6 +1,6 @@
 { Type =
     { name : Text
-    , formats : List Text
+    , formats : Optional (List Text)
     , rebuild-age : Optional Natural
     , release : Optional Text
     , build-timeout : Optional Natural
@@ -12,7 +12,7 @@
     , dib-cmd : Optional Text
     }
 , default =
-    { formats = [ "raw" ]
+    { formats = None (List Text)
     , rebuild-age = None Natural
     , release = None Text
     , build-timeout = None Natural
