@@ -1,8 +1,4 @@
-all: freeze lint doc demo
-
-.PHONY: demo
-demo:
-	@env DHALL_NODEPOOL=$$(pwd)/package.dhall dhall-to-yaml --explain --file demo/config.dhall > demo/generated_nodepool_config.yaml
+all: freeze lint doc
 
 freeze:
 	@python3 scripts/gen_package.py schemas/  > package.dhall
