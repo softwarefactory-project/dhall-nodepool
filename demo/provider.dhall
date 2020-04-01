@@ -10,14 +10,16 @@ let mapImage = https://prelude.dhall-lang.org/List/map OurImage
 
 let provider_name = "vexxhost-nodepool-sf"
 
-in  { name = "${provider_name}"
-    , cloud = "${provider_name}"
-    , clean-floating-ips = Some True
-    , region-name = Some "RegionOne"
-    , boot-timeout = Some 120
-    , rate = Some 1
-    , diskimages = Some
-        ( mapImage
+in  Nodepool.Providers.openstack
+      Nodepool.Openstack::{
+      , name = "${provider_name}"
+      , cloud = Some "${provider_name}"
+      , clean-floating-ips = Some True
+      , region-name = Some "RegionOne"
+      , boot-timeout = Some 120
+      , rate = Some 1
+      , diskimages = Some
+        [ mapImage
             Nodepool.OpenstackDiskImage.Type
             (     \(image : OurImage)
               ->  Nodepool.OpenstackDiskImage::{
@@ -26,24 +28,25 @@ in  { name = "${provider_name}"
                   }
             )
             ./images.dhall
-        )
-    , pools =
-      [ Nodepool.OpenstackPool::{
-        , name = "main"
-        , max-servers = 25
-        , networks = Some [ "public" ]
-        , labels = Some
-            ( mapImage
-                Nodepool.OpenstackLabel.Type
-                (     \(image : OurImage)
-                  ->  Nodepool.OpenstackLabel::{
-                      , name = image.label.name
-                      , flavor-name = "nodepool-infra"
-                      , diskimage = Some image.diskimage.name
-                      }
-                )
+        ]
+      , pools = Some
+        [ Nodepool.OpenstackPool::{
+          , name = "main"
+          , max-servers = 25
+          , networks = Some [ "public" ]
+          , labels =
+              Some
+                [ mapImage
+                    Nodepool.OpenstackLabel.Type
+                    (     \(image : OurImage)
+                      ->  Nodepool.OpenstackLabel::{
+                          , name = image.label.name
+                          , flavor-name = "nodepool-infra"
+                          , diskimage = Some image.diskimage.name
+                          }
+                    )
+                ]
                 ./images.dhall
-            )
-        }
-      ]
-    }
+          }
+        ]
+      }

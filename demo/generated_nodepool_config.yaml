@@ -21,26 +21,7 @@ labels:
     name: dib-centos-7
   - min-ready: 1
     name: cloud-centos-8
-providers:
-  boot-timeout: 120
-  clean-floating-ips: true
-  cloud: vexxhost-nodepool-sf
-  diskimages:
-    - config-drive: true
-      name: dib-centos-7
-    - name: cloud-centos-8
-  name: vexxhost-nodepool-sf
-  pools:
-    - labels:
-        - diskimage: dib-centos-7
-          flavor-name: nodepool-infra
-          name: dib-centos-7
-        - diskimage: cloud-centos-8
-          flavor-name: nodepool-infra
-          name: cloud-centos-8
-      max-servers: 25
-      name: main
-      networks:
-        - public
-  rate: 1
-  region-name: RegionOne
+zookeeper-servers:
+  - chroot: /nodepool
+    host: localhost
+    port: 2181

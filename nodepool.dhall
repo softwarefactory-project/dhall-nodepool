@@ -1,10 +1,6 @@
 let Nodepool = ./package.dhall
 
 in  Nodepool.Config::{
-    , webapp = Some Nodepool.WebApp::{ port = 8008 }
-    , elements-dir = Some "/path/to/elements"
-    , images-dir = Some "/path/to/images"
-    , build-log-dir = Some "/path/to/build-logs"
     , providers = Some
       [ Nodepool.Providers.openstack
           Nodepool.Openstack::{
