@@ -1,3 +1,3 @@
-{ Type = { port : Natural, listen_address : Text }
-, default = { port = 8005, listen_address = "0.0.0.0" }
+{ Type = { port : Optional Natural, listen_address : Optional Text }
+, default = { port = None Natural, listen_address = None Text }
 }
