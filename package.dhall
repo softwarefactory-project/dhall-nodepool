@@ -10,7 +10,7 @@
 , AwsPoolLabel =
     ./schemas/AwsPoolLabel.dhall sha256:7d51300d50064549cbf409e6f360a149ab1f3919a684f1d0566063f86b50cdf6
 , Config =
-    ./schemas/Config.dhall sha256:57fe0e0431afc7bddce20b5cd88c9ea420149292e8b1becd0baa83324c375fea
+    ./schemas/Config.dhall sha256:6b1401ce93ab373e98a1caeef356f03e5d666e61e21cbb444c0e18fc3bc37ecb
 , DiskImage =
     ./schemas/DiskImage.dhall sha256:400b080da0339e476da88df7e395abde258bfd3c63d1a8bfa125643aabc393ed
 , Gce =

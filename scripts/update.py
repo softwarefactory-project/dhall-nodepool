@@ -15,12 +15,12 @@
 
 from sys import argv
 from pathlib import Path
-from typing import List, Tuple
+from typing import Any, Dict, List, Tuple
 from os import listdir
 
 try:
-    from nodepool.driver import Drivers
-    import voluptuous
+    from nodepool.driver import Drivers  # type: ignore
+    import voluptuous  # type: ignore
 except ImportError:
     print("ImportError: Install nodepool in a venv first, like so:")
     print("  sudo dnf install -y python3-devel")
@@ -29,16 +29,18 @@ except ImportError:
     print("  python3 -m pip install nodepool")
     exit(1)
 
-def SoftCapitalize(name):
+
+def dhall_case(name: str) -> str:
     return "".join(map(
         lambda s: str(s)[0].upper() + str(s)[1:],
         str(name).split('-')))
 
 
-def voluptuous_to_dhall_types(name, schema):
-    def convert(name, value):
+RecordType = Tuple[str, List[Tuple[str, str]]]
+def voluptuous_to_dhall_types(name: str, schema: Dict[Any, Any]) -> List[RecordType]:
+    def dhall_type(name: str, value: Any) -> Tuple[str, List[RecordType]]:
         prefix = ""
-        schemas = []
+        schemas: List[RecordType] = []
         if isinstance(value, list):
             value = value[0]
             prefix = "List "
@@ -58,8 +60,9 @@ def voluptuous_to_dhall_types(name, schema):
             if name.endswith('s') and prefix == "List ":
                 sub_name = name[:-1]
             vtype = "(./" + sub_name + ".dhall).Type"
+            # This is for https://opendev.org/zuul/nodepool/src/commit/2779a61a103e4f67104c9adc9f09d24cb1392457/nodepool/driver/openstack/config.py#L397
             if isinstance(value, voluptuous.validators.All):
-                value_dict = {}
+                value_dict: Dict[Any, Any] = {}
                 for validator in value.validators:
                     if not isinstance(validator, dict):
                         for sub_validator in validator.validators:
@@ -71,57 +74,59 @@ def voluptuous_to_dhall_types(name, schema):
                 voluptuous_to_dhall_types(sub_name, value))
         elif isinstance(value, voluptuous.validators.Any):
             if value.validators == (str, [str]):
+                # This is to accomodate the as_list filter. In Dhall we always want List.
                 vtype = "List Text"
             else:
                 raise RuntimeError(str(name) + ":unknown Any validator " + str(value))
         elif isinstance(value, voluptuous.validators.Coerce):
+            # This is the voluptuous way to check for float
             vtype = "Double"
         else:
-            import pdb; pdb.set_trace()
+            # import pdb; pdb.set_trace()
             raise RuntimeError(str(name) + ": unknown type " + str(type(value)) + " => " + str(value))
         return ((prefix + "(" + vtype + ")") if prefix else vtype, schemas)
 
-    def schemas(name, schema):
+    def schemas(name: str, schema: Dict[Any, Any]) -> List[RecordType]:
         schemas = []
         dhall = []
         for k, v in schema.items():
-            dhall_type, new_schemas = convert(SoftCapitalize(name) + SoftCapitalize(k), v)
+            dtype, new_schemas = dhall_type(dhall_case(name) + dhall_case(k), v)
             schemas.extend(new_schemas)
             if isinstance(k, voluptuous.validators.Any):
                 for k in k.validators:
-                    dhall.append((str(k), dhall_type))
+                    dhall.append((str(k), dtype))
             else:
-                dhall.append((str(k), dhall_type))
+                dhall.append((str(k), dtype))
         schemas.append((name, sorted(dhall)))
         return schemas
 
     return schemas(name, schema)
 
 
-def dhall_type_to_schemas(dtype):
+def dhall_type_to_schemas(dtype: RecordType) -> Tuple[Path, str]:
     dname, dattr = dtype
-    def isRequired(attr):
-        if dname == "Openstack" and attr == "driver":
+    def isRequired(name: str) -> bool:
+        if dname == "Openstack" and name == "driver":
             return False
         return dname != "AwsCloudImageImageFilter" and \
-            attr in ('name', 'driver', 'pools', 'labels', 'nodes')
-    def defaultVal(name, val):
+            name in ('name', 'driver', 'pools', 'labels', 'nodes')
+    def defaultVal(name: str, val: str) -> str:
         if name == "driver":
             return ("Some " if dname == "Openstack" else "") + '"' + dname.lower() + '"'
         else:
             return "None ( " + val + " ) "
     defaults = [k + " = " + defaultVal(k, v) for k, v in dattr if not isRequired(k) or k == "driver"]
-    return ["schemas/" + dname + ".dhall", "\n".join([
+    return (Path("schemas") / (dname + ".dhall"), "\n".join([
         "{ Type = {",
         " , ".join([k + " : " + ("Optional " if not isRequired(k) else "") + " ( " + v + " ) "
                     for k, v in dattr])
         , "}, default = ", ("{ " + " , ".join(defaults) + " }") if defaults else "{=}" , "}"
-    ])]
+    ]))
 
 
-def write(k, v):
+def write(k: Path, v: str) -> None:
     if len(argv) == 1:
-        open(k, "w").write(v)
+        k.write_text(v)
     else:
         print(k, v)
 
@@ -132,6 +137,6 @@ for driver in drivers:
     output = list(map(dhall_type_to_schemas, voluptuous_to_dhall_types(driver.capitalize(), schema)))
     for k, v in output:
         write(k, v)
-write("./schemas/Providers.dhall", "\n".join([
+write(Path("./schemas/Providers.dhall"), "\n".join([
     "<", " | ".join([driver + " : (./" + driver.capitalize() + ".dhall).Type" for driver in drivers]), ">"
 ]))
