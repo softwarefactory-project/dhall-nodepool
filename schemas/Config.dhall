@@ -20,5 +20,6 @@
     , labels = None (List (./Label.dhall).Type)
     , webapp = None (./WebApp.dhall).Type
     , providers = None (List ./Providers.dhall)
+    , zookeeper-servers = [] : List (./ZookeeperServer.dhall).Type
     }
 }
