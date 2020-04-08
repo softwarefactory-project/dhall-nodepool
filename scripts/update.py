@@ -15,7 +15,7 @@
 
 from sys import argv
 from pathlib import Path
-from typing import Any, Dict, List, Tuple
+from typing import Any, Callable, Dict, List, Tuple
 from os import listdir
 
 try:
@@ -103,25 +103,17 @@ def voluptuous_to_dhall_types(name: str, schema: Dict[Any, Any]) -> List[RecordT
     return schemas(name, schema)
 
 
-def dhall_type_to_schemas(dtype: RecordType) -> Tuple[Path, str]:
-    dname, dattr = dtype
-    def isRequired(name: str) -> bool:
-        if dname == "Openstack" and name == "driver":
-            return False
-        return dname != "AwsCloudImageImageFilter" and \
-            name in ('name', 'driver', 'pools', 'labels', 'nodes')
-    def defaultVal(name: str, val: str) -> str:
-        if name == "driver":
-            return ("Some " if dname == "Openstack" else "") + '"' + dname.lower() + '"'
-        else:
-            return "None ( " + val + " ) "
-    defaults = [k + " = " + defaultVal(k, v) for k, v in dattr if not isRequired(k) or k == "driver"]
-    return (Path("schemas") / (dname + ".dhall"), "\n".join([
-        "{ Type = {",
-        " , ".join([k + " : " + ("Optional " if not isRequired(k) else "") + " ( " + v + " ) "
-                    for k, v in dattr])
-        , "}, default = ", ("{ " + " , ".join(defaults) + " }") if defaults else "{=}" , "}"
-    ]))
+def dhall_type_to_schemas(isRequired: Callable[[str, str], bool], defaultVal: Callable[[str, str, str], str]) -> Callable[[RecordType], Tuple[Path, str]]:
+    def func(record: RecordType) -> Tuple[Path, str]:
+        record_name, record_attrs = record
+        defaults = [k + " = " + defaultVal(record_name, k, v) for k, v in record_attrs if not isRequired(record_name, k) or k == "driver"]
+        return (Path("schemas") / (record_name + ".dhall"), "\n".join([
+            "{ Type = {",
+            " , ".join([k + " : " + ("Optional " if not isRequired(record_name, k) else "") + " ( " + v + " ) "
+                        for k, v in record_attrs])
+            , "}, default = ", ("{ " + " , ".join(defaults) + " }") if defaults else "{=}" , "}"
+        ]))
+    return func
 
 
 def write(k: Path, v: str) -> None:
@@ -130,12 +122,27 @@ def write(k: Path, v: str) -> None:
     else:
         print(k, v)
 
+# Nodepool workarounds
+def isRequired(record_name: str, attr_name: str) -> bool:
+    if record_name == "Openstack" and attr_name == "driver":
+        return False
+    return record_name != "AwsCloudImageImageFilter" and \
+        attr_name in ('name', 'driver', 'pools', 'labels', 'nodes')
+
+def defaultVal(record_name: str, attr_name: str, attr_type: str) -> str:
+    if attr_name == "driver":
+        return ("Some " if record_name == "Openstack" else "") + '"' + record_name.lower() + '"'
+    else:
+        return "None ( " + attr_type + " ) "
+
 Drivers.load()
 drivers = list(filter(lambda s: s not in ("fake", "test"), Drivers.drivers.keys()))
 for driver in drivers:
-    schema = Drivers.get(driver).getProviderConfig(dict(name='dhall')).getSchema().schema
-    output = list(map(dhall_type_to_schemas, voluptuous_to_dhall_types(driver.capitalize(), schema)))
-    for k, v in output:
+    for k,v in list(map(
+            dhall_type_to_schemas(isRequired, defaultVal),
+            voluptuous_to_dhall_types(
+                driver.capitalize(),
+                Drivers.get(driver).getProviderConfig(dict(name='dhall')).getSchema().schema))):
         write(k, v)
 write(Path("./schemas/Providers.dhall"), "\n".join([
     "<", " | ".join([driver + " : (./" + driver.capitalize() + ".dhall).Type" for driver in drivers]), ">"
