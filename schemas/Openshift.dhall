@@ -3,15 +3,15 @@
     , driver : Text
     , launch-retries : Optional Natural
     , max-concurrency : Optional Natural
-    , max-pods : Optional Natural
+    , max-projects : Optional Natural
     , name : Text
-    , pools : List (./OpenshiftpodsPool.dhall).Type
+    , pools : List (./OpenshiftPool.dhall).Type
     }
 , default =
     { context = None Text
-    , driver = "openshiftpods"
+    , driver = "openshift"
     , launch-retries = None Natural
     , max-concurrency = None Natural
-    , max-pods = None Natural
+    , max-projects = None Natural
     }
 }

@@ -2,19 +2,15 @@
     { config-drive : Optional Bool
     , connection-port : Optional Natural
     , connection-type : Optional Text
-    , image-id : Optional Text
-    , image-name : Optional Text
+    , meta : Optional { mapKey : Text, mapValue : Text }
     , name : Text
-    , python-path : Optional Text
-    , username : Optional Text
+    , pause : Optional Bool
     }
 , default =
     { config-drive = None Bool
     , connection-port = None Natural
     , connection-type = None Text
-    , image-id = None Text
-    , image-name = None Text
-    , python-path = None Text
-    , username = None Text
+    , meta = None { mapKey : Text, mapValue : Text }
+    , pause = None Bool
     }
 }

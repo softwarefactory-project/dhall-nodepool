@@ -1,30 +1,27 @@
 { Type =
-    { name : Text
-    , node-attributes : Optional (List { mapKey : Text, mapValue : Text })
-    , max-cores : Optional Natural
-    , max-servers : Natural
-    , max-ram : Optional Natural
-    , ignore-provider-quota : Optional Bool
+    { auto-floating-ip : Optional Bool
     , availability-zones : Optional (List Text)
-    , networks : Optional (List Text)
-    , security-groups : Optional (List Text)
-    , auto-floating-ip : Optional Bool
     , host-key-checking : Optional Bool
-    , diskimages : Optional (List (./OpenstackDiskImage.dhall).Type)
-    , labels : Optional (List (./OpenstackLabel.dhall).Type)
+    , ignore-provider-quota : Optional Bool
+    , labels : List (./OpenstackPoolLabel.dhall).Type
+    , max-cores : Optional Natural
+    , max-ram : Optional Natural
+    , max-servers : Optional Natural
+    , name : Text
+    , networks : Optional (List Text)
+    , node-attributes : Optional { mapKey : Text, mapValue : Text }
+    , security-groups : Optional (List Text)
     }
 , default =
-    { node-attributes = None (List { mapKey : Text, mapValue : Text })
-    , max-cores = None Natural
-    , max-servers = Natural
-    , max-ram = None Natural
-    , ignore-provider-quota = None Bool
+    { auto-floating-ip = None Bool
     , availability-zones = None (List Text)
-    , networks = None (List Text)
-    , security-groups = None (List Text)
-    , auto-floating-ip = None Bool
     , host-key-checking = None Bool
-    , diskimages = None (List (./OpenstackDiskImage.dhall).Type)
-    , labels = None (List (./OpenstackLabel.dhall).Type)
+    , ignore-provider-quota = None Bool
+    , max-cores = None Natural
+    , max-ram = None Natural
+    , max-servers = None Natural
+    , networks = None (List Text)
+    , node-attributes = None { mapKey : Text, mapValue : Text }
+    , security-groups = None (List Text)
     }
 }

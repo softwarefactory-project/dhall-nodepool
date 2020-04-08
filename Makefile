@@ -1,5 +1,13 @@
 all: freeze lint doc
 
+update: run-update all
+
+run-update:
+	@python3 scripts/update.py
+
+clean:
+	@rm -f schemas/Gce* schemas/Kubernetes* schemas/Open* schemas/Static*
+
 freeze:
 	@python3 scripts/gen_package.py schemas/  > package.dhall
 	@dhall freeze --inplace ./package.dhall --all

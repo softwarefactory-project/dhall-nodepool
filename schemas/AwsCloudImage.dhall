@@ -1,19 +1,17 @@
 { Type =
-    { config-drive : Optional Bool
-    , connection-port : Optional Natural
+    { connection-port : Optional Natural
     , connection-type : Optional Text
+    , image-filters : Optional (List (./AwsCloudImageImageFilter.dhall).Type)
     , image-id : Optional Text
-    , image-name : Optional Text
     , name : Text
     , python-path : Optional Text
     , username : Optional Text
     }
 , default =
-    { config-drive = None Bool
-    , connection-port = None Natural
+    { connection-port = None Natural
     , connection-type = None Text
+    , image-filters = None (List (./AwsCloudImageImageFilter.dhall).Type)
     , image-id = None Text
-    , image-name = None Text
     , python-path = None Text
     , username = None Text
     }

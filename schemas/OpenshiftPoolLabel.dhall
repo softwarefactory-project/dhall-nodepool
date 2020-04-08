@@ -1,17 +1,18 @@
-{- TODO add union for magePullPolicy, can be IfNotPresent, Always or Never. -}
 { Type =
-    { name : Text
+    { cpu : Optional Natural
     , image : Optional Text
     , image-pull : Optional Text
-    , cpu : Optional Natural
     , memory : Optional Natural
+    , name : Text
     , python-path : Optional Text
+    , type : Optional Text
     }
 , default =
-    { image = None Text
+    { cpu = None Natural
+    , image = None Text
     , image-pull = None Text
-    , cpu = None Natural
     , memory = None Natural
     , python-path = None Text
+    , type = None Text
     }
 }

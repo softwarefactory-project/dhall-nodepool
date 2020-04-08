@@ -1,40 +1,39 @@
 { Type =
-    { name : Text
+    { boot-timeout : Optional Natural
+    , clean-floating-ips : Optional Bool
     , cloud : Optional Text
+    , cloud-images : Optional (List (./OpenstackCloudImage.dhall).Type)
+    , diskimages : Optional (List (./OpenstackDiskimage.dhall).Type)
     , driver : Optional Text
-    , max-concurrency : Optional Natural
-    , boot-timeout : Optional Natural
-    , launch-timeout : Optional Natural
-    , nodepool-id : Optional Text
-    , launch-retries : Optional Natural
-    , region-name : Optional Text
     , hostname-format : Optional Text
     , image-name-format : Optional Text
+    , launch-retries : Optional Natural
+    , launch-timeout : Optional Natural
+    , max-concurrency : Optional Natural
+    , name : Text
+    , nodepool-id : Optional Text
+    , pools : List (./OpenstackPool.dhall).Type
+    , port-cleanup-interval : Optional Natural
     , post-upload-hook : Optional Text
     , rate : Optional Double
-    , clean-floating-ips : Optional Bool
-    , port-cleanup-interval : Optional Natural
-    , diskimages : Optional (List (./OpenstackDiskImage.dhall).Type)
-    , cloud-images : Optional (List (./OpenstackCloudImage.dhall).Type)
-    , pools : Optional (List (./OpenstackPool.dhall).Type)
+    , region-name : Optional Text
     }
 , default =
-    { cloud = None Text
+    { boot-timeout = None Natural
+    , clean-floating-ips = None Bool
+    , cloud = None Text
+    , cloud-images = None (List (./OpenstackCloudImage.dhall).Type)
+    , diskimages = None (List (./OpenstackDiskimage.dhall).Type)
     , driver = Some "openstack"
-    , max-concurrency = None Natural
-    , boot-timeout = None Natural
-    , launch-timeout = None Natural
-    , nodepool-id = None Text
-    , launch-retries = None Natural
-    , region-name = None Text
     , hostname-format = None Text
     , image-name-format = None Text
+    , launch-retries = None Natural
+    , launch-timeout = None Natural
+    , max-concurrency = None Natural
+    , nodepool-id = None Text
+    , port-cleanup-interval = None Natural
     , post-upload-hook = None Text
     , rate = None Double
-    , clean-floating-ips = None Bool
-    , port-cleanup-interval = None Natural
-    , diskimages = None (List (./OpenstackDiskImage.dhall).Type)
-    , cloud-images = None (List (./OpenstackCloudImage.dhall).Type)
-    , pools = None (List (./OpenstackPool.dhall).Type)
+    , region-name = None Text
     }
 }

@@ -7,7 +7,7 @@ in  Nodepool.Config::{
       [ Nodepool.Providers.static
           Nodepool.Static::{
           , name = "provider_static"
-          , pools = Some
+          , pools =
             [ Nodepool.StaticPool::{
               , name = "main"
               , nodes =
