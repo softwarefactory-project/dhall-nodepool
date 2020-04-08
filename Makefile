@@ -1,5 +1,10 @@
 all: freeze lint doc
 
+check: mypy update
+
+mypy:
+	@mypy --strict scripts/update.py
+
 update: run-update all
 
 run-update:
