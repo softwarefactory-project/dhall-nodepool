@@ -5,13 +5,13 @@ check: mypy update
 mypy:
 	@mypy --strict scripts/update.py
 
-update: run-update all
+update: clean run-update all
 
 run-update:
 	@python3 scripts/update.py
 
 clean:
-	@rm -f schemas/Gce* schemas/Kubernetes* schemas/Open* schemas/Static*
+	@rm -f schemas/* *.dhall
 
 freeze:
 	@python3 scripts/gen_package.py schemas/  > package.dhall

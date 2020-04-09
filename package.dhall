@@ -10,9 +10,9 @@
 , AwsPoolLabel =
     ./schemas/AwsPoolLabel.dhall sha256:7d51300d50064549cbf409e6f360a149ab1f3919a684f1d0566063f86b50cdf6
 , Config =
-    ./schemas/Config.dhall sha256:6b1401ce93ab373e98a1caeef356f03e5d666e61e21cbb444c0e18fc3bc37ecb
-, DiskImage =
-    ./schemas/DiskImage.dhall sha256:400b080da0339e476da88df7e395abde258bfd3c63d1a8bfa125643aabc393ed
+    ./schemas/Config.dhall sha256:bfd406462644aa430ac6555de2a50ed25d9967e555d23a1c40857c08e1457741
+, Diskimage =
+    ./schemas/Diskimage.dhall sha256:53da1242ff6dd417534f16bd98c23dfe0814cadc6586f88db4e05cbbeaffac61
 , Gce =
     ./schemas/Gce.dhall sha256:352cf7f765d940ca926dced5834661394a25fefbeed56093c10b58f5d8668c20
 , GceCloudImage =
@@ -59,8 +59,8 @@
     ./schemas/StaticPool.dhall sha256:b7c69024d14be5c261e6b7ab6197578082ca23aad0f048c2a6bb65e283cf1b02
 , StaticPoolNode =
     ./schemas/StaticPoolNode.dhall sha256:bdfa7227f6c8ed280b9fe4ad9fd0f219728e3da367e3d7bf04887cc73ce93f10
-, WebApp =
-    ./schemas/WebApp.dhall sha256:0e3cde952af63619172b62506a55c64b2f4ce4dce4c900b9603d79848c151f4a
+, Webapp =
+    ./schemas/Webapp.dhall sha256:0e3cde952af63619172b62506a55c64b2f4ce4dce4c900b9603d79848c151f4a
 , ZookeeperServer =
-    ./schemas/ZookeeperServer.dhall sha256:8fb4a851f4a2d610e81ba77566531aef518f4452317c436bdec61a0e32d95135
+    ./schemas/ZookeeperServer.dhall sha256:661ed4a88a521128cc2be47452415fcb2af3bc4584c7fb15df20725d4d06d8cb
 }
