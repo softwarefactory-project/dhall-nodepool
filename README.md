@@ -12,7 +12,7 @@ let Nodepool =
       ? https://softwarefactory-project.io/cgit/software-factory/dhall-nodepool/plain/package.dhall
 
 in  Nodepool.Config::{
-    , providers = Some
+    , providers =
       [ Nodepool.Providers.static
           Nodepool.Static::{
           , name = "provider_static"
@@ -29,6 +29,7 @@ in  Nodepool.Config::{
             ]
           }
       ]
+    , labels = [ Nodepool.Label::{ name = "mylabel" } ]
     , zookeeper-servers =
       [ Nodepool.ZookeeperServer::{ host = "zk01.example.com" } ]
     }
@@ -37,6 +38,8 @@ in  Nodepool.Config::{
 
 ```yaml
 # dhall-to-yaml --file examples/demo.dhall
+labels:
+  - name: mylabel
 providers:
   - driver: static
     name: provider_static
@@ -48,6 +51,5 @@ providers:
             name: static.example.com
 zookeeper-servers:
   - host: zk01.example.com
-    port: 2181
 
 ```

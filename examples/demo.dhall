@@ -3,7 +3,7 @@ let Nodepool =
       ? https://softwarefactory-project.io/cgit/software-factory/dhall-nodepool/plain/package.dhall
 
 in  Nodepool.Config::{
-    , providers = Some
+    , providers =
       [ Nodepool.Providers.static
           Nodepool.Static::{
           , name = "provider_static"
@@ -20,6 +20,7 @@ in  Nodepool.Config::{
             ]
           }
       ]
+    , labels = [ Nodepool.Label::{ name = "mylabel" } ]
     , zookeeper-servers =
       [ Nodepool.ZookeeperServer::{ host = "zk01.example.com" } ]
     }
