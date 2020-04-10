@@ -5,7 +5,7 @@
     , diskimage : Optional Text
     , flavor-name : Optional Text
     , host-key-checking : Optional Bool
-    , instance-properties : Optional { mapKey : Text, mapValue : Text }
+    , instance-properties : Optional (List { mapKey : Text, mapValue : Text })
     , key-name : Optional Text
     , min-ram : Optional Natural
     , name : Text
@@ -20,7 +20,7 @@
     , diskimage = None Text
     , flavor-name = None Text
     , host-key-checking = None Bool
-    , instance-properties = None { mapKey : Text, mapValue : Text }
+    , instance-properties = None (List { mapKey : Text, mapValue : Text })
     , key-name = None Text
     , min-ram = None Natural
     , networks = None (List Text)

@@ -9,7 +9,7 @@
     , max-servers : Optional Natural
     , name : Optional Text
     , networks : Optional (List Text)
-    , node-attributes : Optional { mapKey : Text, mapValue : Text }
+    , node-attributes : Optional (List { mapKey : Text, mapValue : Text })
     , security-groups : Optional (List Text)
     }
 , default =
@@ -23,7 +23,7 @@
     , max-servers = None Natural
     , name = None Text
     , networks = None (List Text)
-    , node-attributes = None { mapKey : Text, mapValue : Text }
+    , node-attributes = None (List { mapKey : Text, mapValue : Text })
     , security-groups = None (List Text)
     }
 }

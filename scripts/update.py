@@ -55,7 +55,7 @@ def voluptuous_to_dhall_types(name: str, root: bool, schema: Dict[Any, Any]) -> 
         elif value == int:
             vtype = "Natural"
         elif value == dict:
-            vtype = "{ mapKey : Text, mapValue : Text }"
+            vtype = "List { mapKey : Text, mapValue : Text }"
         elif value == list:
             print(str(name) + ": skipping empty list")
             return (None, schemas)
