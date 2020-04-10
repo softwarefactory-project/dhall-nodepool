@@ -6,10 +6,10 @@
     , max-concurrency : Optional Natural
     , name : Text
     , pools : List (./GcePool.dhall).Type
-    , project : Optional Text
+    , project : Text
     , rate-limit : Optional Natural
-    , region : Optional Text
-    , zone : Optional Text
+    , region : Text
+    , zone : Text
     }
 , default =
     { boot-timeout = None Natural
@@ -17,9 +17,6 @@
     , driver = "gce"
     , launch-retries = None Natural
     , max-concurrency = None Natural
-    , project = None Text
     , rate-limit = None Natural
-    , region = None Text
-    , zone = None Text
     }
 }

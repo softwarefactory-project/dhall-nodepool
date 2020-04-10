@@ -1,5 +1,5 @@
 { Type =
-    { context : Optional Text
+    { context : Text
     , driver : Text
     , launch-retries : Optional Natural
     , max-concurrency : Optional Natural
@@ -8,8 +8,7 @@
     , pools : List (./OpenshiftpodsPool.dhall).Type
     }
 , default =
-    { context = None Text
-    , driver = "openshiftpods"
+    { driver = "openshiftpods"
     , launch-retries = None Natural
     , max-concurrency = None Natural
     , max-pods = None Natural

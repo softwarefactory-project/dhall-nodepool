@@ -8,7 +8,7 @@
     , name : Text
     , pools : List (./AwsPool.dhall).Type
     , profile-name : Optional Text
-    , region-name : Optional Text
+    , region-name : Text
     }
 , default =
     { boot-timeout = None Natural
@@ -18,6 +18,5 @@
     , launch-retries = None Natural
     , max-concurrency = None Natural
     , profile-name = None Text
-    , region-name = None Text
     }
 }

@@ -4,7 +4,7 @@
     , connection-type : Optional Text
     , image-id : Optional Text
     , image-name : Optional Text
-    , name : Text
+    , name : Optional Text
     , python-path : Optional Text
     , username : Optional Text
     }
@@ -14,6 +14,7 @@
     , connection-type = None Text
     , image-id = None Text
     , image-name = None Text
+    , name = None Text
     , python-path = None Text
     , username = None Text
     }

@@ -3,12 +3,8 @@
     , image-pull : Optional Text
     , name : Text
     , python-path : Optional Text
-    , type : Optional Text
+    , type : Text
     }
 , default =
-    { image = None Text
-    , image-pull = None Text
-    , python-path = None Text
-    , type = None Text
-    }
+    { image = None Text, image-pull = None Text, python-path = None Text }
 }

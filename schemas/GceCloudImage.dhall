@@ -5,7 +5,7 @@
     , image-id : Optional Text
     , image-project : Optional Text
     , key : Optional Text
-    , name : Text
+    , name : Optional Text
     , python-path : Optional Text
     , username : Optional Text
     }
@@ -16,6 +16,7 @@
     , image-id = None Text
     , image-project = None Text
     , key = None Text
+    , name = None Text
     , python-path = None Text
     , username = None Text
     }

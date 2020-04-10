@@ -3,11 +3,11 @@
     , availability-zones : Optional (List Text)
     , host-key-checking : Optional Bool
     , ignore-provider-quota : Optional Bool
-    , labels : List (./OpenstackPoolLabel.dhall).Type
+    , labels : Optional (List (./OpenstackPoolLabel.dhall).Type)
     , max-cores : Optional Natural
     , max-ram : Optional Natural
     , max-servers : Optional Natural
-    , name : Text
+    , name : Optional Text
     , networks : Optional (List Text)
     , node-attributes : Optional { mapKey : Text, mapValue : Text }
     , security-groups : Optional (List Text)
@@ -17,9 +17,11 @@
     , availability-zones = None (List Text)
     , host-key-checking = None Bool
     , ignore-provider-quota = None Bool
+    , labels = None (List (./OpenstackPoolLabel.dhall).Type)
     , max-cores = None Natural
     , max-ram = None Natural
     , max-servers = None Natural
+    , name = None Text
     , networks = None (List Text)
     , node-attributes = None { mapKey : Text, mapValue : Text }
     , security-groups = None (List Text)

@@ -1,10 +1,10 @@
 { Type =
     { boot-timeout : Optional Natural
     , clean-floating-ips : Optional Bool
-    , cloud : Optional Text
+    , cloud : Text
     , cloud-images : Optional (List (./OpenstackCloudImage.dhall).Type)
     , diskimages : Optional (List (./OpenstackDiskimage.dhall).Type)
-    , driver : Optional Text
+    , driver : Text
     , hostname-format : Optional Text
     , image-name-format : Optional Text
     , launch-retries : Optional Natural
@@ -12,7 +12,7 @@
     , max-concurrency : Optional Natural
     , name : Text
     , nodepool-id : Optional Text
-    , pools : List (./OpenstackPool.dhall).Type
+    , pools : Optional (List (./OpenstackPool.dhall).Type)
     , port-cleanup-interval : Optional Natural
     , post-upload-hook : Optional Text
     , rate : Optional Double
@@ -21,7 +21,6 @@
 , default =
     { boot-timeout = None Natural
     , clean-floating-ips = None Bool
-    , cloud = None Text
     , cloud-images = None (List (./OpenstackCloudImage.dhall).Type)
     , diskimages = None (List (./OpenstackDiskimage.dhall).Type)
     , driver = Some "openstack"
@@ -31,6 +30,7 @@
     , launch-timeout = None Natural
     , max-concurrency = None Natural
     , nodepool-id = None Text
+    , pools = None (List (./OpenstackPool.dhall).Type)
     , port-cleanup-interval = None Natural
     , post-upload-hook = None Text
     , rate = None Double

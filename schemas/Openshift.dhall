@@ -1,5 +1,5 @@
 { Type =
-    { context : Optional Text
+    { context : Text
     , driver : Text
     , launch-retries : Optional Natural
     , max-concurrency : Optional Natural
@@ -8,8 +8,7 @@
     , pools : List (./OpenshiftPool.dhall).Type
     }
 , default =
-    { context = None Text
-    , driver = "openshift"
+    { driver = "openshift"
     , launch-retries = None Natural
     , max-concurrency = None Natural
     , max-projects = None Natural

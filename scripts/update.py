@@ -36,8 +36,8 @@ def dhall_case(name: str) -> str:
         lambda s: str(s)[0].upper() + str(s)[1:],
         str(name).split('-')))
 
-
-RecordType = Tuple[str, List[Tuple[str, str]]]
+RecordAttributes = List[Tuple[Tuple[str, bool], str]]
+RecordType = Tuple[str, RecordAttributes]
 def voluptuous_to_dhall_types(name: str, root: bool, schema: Dict[Any, Any]) -> List[RecordType]:
     def dhall_type(name: str, value: Any) -> Tuple[Optional[str], List[RecordType]]:
         prefix = ""
@@ -102,12 +102,15 @@ def voluptuous_to_dhall_types(name: str, root: bool, schema: Dict[Any, Any]) -> 
             dtype, new_schemas = dhall_type((dhall_case(name) if not root else "")+ dhall_case(k), v)
             if dtype is None:
                 continue
+            is_required = isinstance(k, voluptuous.schema_builder.Required)
+            attr_name = (str(k), is_required)
             schemas.extend(new_schemas)
             if isinstance(k, voluptuous.validators.Any):
                 for k in k.validators:
-                    dhall.append((str(k), dtype))
+                    attr_name = (str(k), False)
+                    dhall.append((attr_name, dtype))
             else:
-                dhall.append((str(k), dtype))
+                dhall.append((attr_name, dtype))
         schemas.append((name, dhall))
         return schemas
 
@@ -115,7 +118,6 @@ def voluptuous_to_dhall_types(name: str, root: bool, schema: Dict[Any, Any]) -> 
 
 
 def dhall_type_to_schemas(
-        isRequired: Callable[[str, str], bool],
         defaultVal: Callable[[str, str, str], str],
         extra_attr: List[RecordType]) -> Callable[[RecordType], Tuple[Path, str]]:
     def func(record: RecordType) -> Tuple[Path, str]:
@@ -123,11 +125,11 @@ def dhall_type_to_schemas(
         extra = [v for k, v in extra_attr if k == record_name]
         if extra:
             record_attrs += extra[0]
-        record_attrs = sorted(record_attrs)
-        defaults = [k + " = " + defaultVal(record_name, k, v) for k, v in record_attrs if not isRequired(record_name, k) or k in ("driver", "zookeeper-servers")]
+        record_attrs = sorted(record_attrs, key=str)
+        defaults = list(filter(lambda s: not s.endswith(" = "), [k[0] + " = " + defaultVal(record_name, k[0], k[1], v) for k, v in record_attrs]))
         return (Path("schemas") / (record_name + ".dhall"), "\n".join([
             "{ Type = {",
-            " , ".join([k + " : " + ("Optional " if not isRequired(record_name, k) else "") + " ( " + v + " ) "
+            " , ".join([k[0] + " : " + ("Optional " if not k[1] else "") + " ( " + v + " ) "
                         for k, v in record_attrs])
             , "}, default = ", ("{ " + " , ".join(defaults) + " }") if defaults else "{=}" , "}"
         ]))
@@ -141,19 +143,15 @@ def write(k: Path, v: str) -> None:
         print(k, v)
 
 # Nodepool workarounds
-def isRequired(record_name: str, attr_name: str) -> bool:
-    if record_name == "Openstack" and attr_name == "driver":
-        return False
-    return record_name != "AwsCloudImageImageFilter" and \
-        attr_name in ('name', 'host', 'driver', 'pools', 'labels', 'nodes', 'zookeeper-servers', 'providers')
-
-def defaultVal(record_name: str, attr_name: str, attr_type: str) -> str:
+def defaultVal(record_name: str, attr_name: str, attr_required: bool, attr_type: str) -> str:
     if attr_name == "driver":
         return ("Some " if record_name == "Openstack" else "") + '"' + record_name.lower() + '"'
     elif attr_name == 'zookeeper-servers':
         return "[] : List (./ZookeeperServer.dhall).Type"
-    else:
+    elif not attr_required:
         return "None ( " + attr_type + " ) "
+    else:
+        return ""
 
 Drivers.load()
 drivers = sorted(list(filter(lambda s: s not in ("fake", "test"), Drivers.drivers.keys())))
@@ -161,7 +159,7 @@ for num, (name, schema) in enumerate([("Config", ConfigValidator.getSchema().sch
                                      list(map(lambda d: (d.capitalize(), Drivers.get(d).getProviderConfig(dict(name='dhall')).getSchema().schema), drivers
                                      ))):
     for k,v in list(map(
-            dhall_type_to_schemas(isRequired, defaultVal, [("Config", [("providers", "List ./Providers.dhall")])]),
+            dhall_type_to_schemas(defaultVal, [("Config", [(("providers", True), "List ./Providers.dhall")])]),
             voluptuous_to_dhall_types(name, num == 0, schema))):
         write(k, v)
 write(Path("./schemas/Providers.dhall"), "\n".join([
