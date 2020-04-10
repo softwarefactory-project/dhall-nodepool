@@ -1,0 +1,25 @@
+labels:
+  - name: fake-label
+    min-ready: 1
+zookeeper-servers: []
+providers:
+  - name: fake-provider
+    cloud: fake
+    driver: openstack
+    region-name: fake-region
+    rate: 0.1
+    diskimages:
+      - name: fake-image
+        meta:
+          key: value
+          key2: value
+    pools:
+      - name: main
+        max-servers: 96
+        availability-zones:
+          - az1
+        labels:
+          - name: fake-label
+            diskimage: fake-image
+            min-ram: 8192
+            flavor-name: 'Fake'

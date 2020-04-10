@@ -1,6 +1,9 @@
-all: freeze lint doc
+all: freeze lint doc test
 
 check: mypy update
+
+test:
+	@bash -c 'for f in $$(find tests/ -name "*.yaml"); do yaml-to-dhall "(./package.dhall).Config.Type" < $$f > /dev/null; done'
 
 mypy:
 	@mypy --strict scripts/update.py
