@@ -156,7 +156,7 @@ def defaultVal(record_name: str, attr_name: str, attr_type: str) -> str:
         return "None ( " + attr_type + " ) "
 
 Drivers.load()
-drivers = list(filter(lambda s: s not in ("fake", "test"), Drivers.drivers.keys()))
+drivers = sorted(list(filter(lambda s: s not in ("fake", "test"), Drivers.drivers.keys())))
 for num, (name, schema) in enumerate([("Config", ConfigValidator.getSchema().schema)] +
                                      list(map(lambda d: (d.capitalize(), Drivers.get(d).getProviderConfig(dict(name='dhall')).getSchema().schema), drivers
                                      ))):

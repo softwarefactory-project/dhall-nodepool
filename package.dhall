@@ -10,13 +10,13 @@
 , AwsPoolLabel =
     ./schemas/AwsPoolLabel.dhall sha256:7d51300d50064549cbf409e6f360a149ab1f3919a684f1d0566063f86b50cdf6
 , Config =
-    ./schemas/Config.dhall sha256:bfd406462644aa430ac6555de2a50ed25d9967e555d23a1c40857c08e1457741
+    ./schemas/Config.dhall sha256:f68a8d3131aef1eeea1172f78a09924c52883489d8837fc0c8944fbfb1b551b2
 , Diskimage =
     ./schemas/Diskimage.dhall sha256:53da1242ff6dd417534f16bd98c23dfe0814cadc6586f88db4e05cbbeaffac61
 , Gce =
-    ./schemas/Gce.dhall sha256:352cf7f765d940ca926dced5834661394a25fefbeed56093c10b58f5d8668c20
+    ./schemas/Gce.dhall sha256:08e9d1fb51220ce5465778620693af0cda95c2653de4ec8cd09a98b73fbb880f
 , GceCloudImage =
-    ./schemas/GceCloudImage.dhall sha256:511c9cc09c07641ab2a5f6bdd21823956dea1c919e7f4a0e75a29bcf221e95a9
+    ./schemas/GceCloudImage.dhall sha256:b47a9276a0363331759e4a0961adcd77f58b625345d2b31645b9bbb1ef6077c4
 , GcePool =
     ./schemas/GcePool.dhall sha256:bb205553c0e7683a3c7213ddd94fbaf3206ab9591f0f09bc1c30b90a1fd3728f
 , GcePoolLabel =
@@ -30,15 +30,15 @@
 , Label =
     ./schemas/Label.dhall sha256:57c0b99faadd31679c690a00b2eac11f17245e291e8f0002fe17bd07f85cbbb7
 , Openshift =
-    ./schemas/Openshift.dhall sha256:be8357fd3626fadd7f09672c4fb65c02d5622a19d9764ddda0a67fd66956669a
+    ./schemas/Openshift.dhall sha256:08af69f26a81c8a353bab674c3dc92846b2d27037c00bc3d3187b29109a2fb9b
 , OpenshiftPool =
-    ./schemas/OpenshiftPool.dhall sha256:5b3f21686d6dbeec95a9ff11e060984f0a15e03c31c391e17703b660cf45f486
+    ./schemas/OpenshiftPool.dhall sha256:cc99879f8671eb7ffda49c271765d5d2d9ce8dfb84f8df16b897b10744094de2
 , OpenshiftPoolLabel =
     ./schemas/OpenshiftPoolLabel.dhall sha256:51da6af995ba538a91fa165fc6e3b1b4325604cd26c48db95d1d11d66b0ce53a
 , Openshiftpods =
-    ./schemas/Openshiftpods.dhall sha256:493681520c8d6e76d0fea162a2838497d47396cc6d1028fae91c7b2771cf51b6
+    ./schemas/Openshiftpods.dhall sha256:b24b05c1f00fdf1a94a2bc04638e8dbb69292913f1748fb4b4baca9b09070b1e
 , OpenshiftpodsPool =
-    ./schemas/OpenshiftpodsPool.dhall sha256:5b438c475c4533703197a7a07c03ea8dabca67ac3dbbba3d69a1fb4f6e6b208b
+    ./schemas/OpenshiftpodsPool.dhall sha256:8e1644ff1a17cfa94057086a6c2ecd6f0479739735652eefc3f66d570253f23d
 , OpenshiftpodsPoolLabel =
     ./schemas/OpenshiftpodsPoolLabel.dhall sha256:d3eebc9b500d7fa2674db854ed5c9ba8c365311023bddffa013853eb8b640c83
 , Openstack =
@@ -52,7 +52,7 @@
 , OpenstackPoolLabel =
     ./schemas/OpenstackPoolLabel.dhall sha256:4305b96b1f0af8f1058b113d5b1dcf7a2f0bcdd1b478bb71df15034bb4c5032b
 , Providers =
-    ./schemas/Providers.dhall sha256:8d6b7b5d3587d04244e9c136e422b11cb0ab12c451a1c2d9cf56592b86a5706b
+    ./schemas/Providers.dhall sha256:a319fdb5821efade9647cd9a1060c54fe65d138c503baa97b110a5aefc4efda9
 , Static =
     ./schemas/Static.dhall sha256:bfa93ce2ae347b5fbade2965a49e2fc2d658589a2137c1cff08451b3a36a5a3b
 , StaticPool =
