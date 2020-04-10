@@ -1,7 +1,9 @@
 - project:
     check:
       jobs:
-        - noop
+        - dhall-diff:
+            nodeset: pod-fedora-latest
     gate:
       jobs:
-        - noop
+        - dhall-diff:
+            nodeset: pod-fedora-latest
