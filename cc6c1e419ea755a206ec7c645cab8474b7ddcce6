@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "7514a46d_fd2436aa",
+        "filename": "tests/basic.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 277
+      },
+      "writtenOn": "2020-04-14T15:51:45Z",
+      "side": 1,
+      "message": "28 is starting to be a bit old ?",
+      "range": {
+        "startLine": 22,
+        "startChar": 36,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "cc6c1e419ea755a206ec7c645cab8474b7ddcce6",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
