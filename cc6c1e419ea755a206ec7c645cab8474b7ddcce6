@@ -46,6 +46,30 @@
       "revId": "cc6c1e419ea755a206ec7c645cab8474b7ddcce6",
       "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
       "unresolved": false
+    },
+    {
+      "key": {
+        "uuid": "723febb3_02d2b817",
+        "filename": "tests/basic.yaml",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 6
+      },
+      "writtenOn": "2020-04-15T09:14:24Z",
+      "side": 1,
+      "message": "This is just a test file that aims to validate the Nodepool dhall schema. So this does not have to be a real container image.",
+      "parentUuid": "b8991cf2_4634bed9",
+      "range": {
+        "startLine": 22,
+        "startChar": 36,
+        "endLine": 22,
+        "endChar": 38
+      },
+      "revId": "cc6c1e419ea755a206ec7c645cab8474b7ddcce6",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
     }
   ]
 }
