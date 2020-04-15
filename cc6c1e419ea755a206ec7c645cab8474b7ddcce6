@@ -1,0 +1,10 @@
+Code-Review+2: Nicolas HICHER <nhicher@redhat.com>
+Code-Review+1: David Moreau Simard <dmsimard@redhat.com>
+Code-Review+2: Fabien Boucher <fboucher@redhat.com>
+Workflow+1: Fabien Boucher <fboucher@redhat.com>
+Verified+2: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-by: Zuul CI <zuul@softwarefactory-project.io>
+Submitted-at: Wed, 15 Apr 2020 09:17:05 +0000
+Reviewed-on: https://softwarefactory-project.io/r/18057
+Project: software-factory/dhall-nodepool
+Branch: refs/heads/master
