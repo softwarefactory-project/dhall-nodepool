@@ -11,13 +11,13 @@
     , zookeeper-servers : List (./ZookeeperServer.dhall).Type
     }
 , default =
-    { build-log-dir = None Text
-    , build-log-retention = None Natural
-    , diskimages = None (List (./Diskimage.dhall).Type)
-    , elements-dir = None Text
-    , images-dir = None Text
-    , max-hold-age = None Natural
-    , webapp = None (./Webapp.dhall).Type
-    , zookeeper-servers = [] : List (./ZookeeperServer.dhall).Type
-    }
+  { build-log-dir = None Text
+  , build-log-retention = None Natural
+  , diskimages = None (List (./Diskimage.dhall).Type)
+  , elements-dir = None Text
+  , images-dir = None Text
+  , max-hold-age = None Natural
+  , webapp = None (./Webapp.dhall).Type
+  , zookeeper-servers = [] : List (./ZookeeperServer.dhall).Type
+  }
 }

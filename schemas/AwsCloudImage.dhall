@@ -8,12 +8,12 @@
     , username : Optional Text
     }
 , default =
-    { connection-port = None Natural
-    , connection-type = None Text
-    , image-filters = None (List (./AwsCloudImageImageFilter.dhall).Type)
-    , image-id = None Text
-    , name = None Text
-    , python-path = None Text
-    , username = None Text
-    }
+  { connection-port = None Natural
+  , connection-type = None Text
+  , image-filters = None (List (./AwsCloudImageImageFilter.dhall).Type)
+  , image-id = None Text
+  , name = None Text
+  , python-path = None Text
+  , username = None Text
+  }
 }

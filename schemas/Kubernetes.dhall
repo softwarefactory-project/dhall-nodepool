@@ -7,9 +7,9 @@
     , pools : List (./KubernetesPool.dhall).Type
     }
 , default =
-    { context = None Text
-    , driver = "kubernetes"
-    , launch-retries = None Natural
-    , max-concurrency = None Natural
-    }
+  { context = None Text
+  , driver = "kubernetes"
+  , launch-retries = None Natural
+  , max-concurrency = None Natural
+  }
 }

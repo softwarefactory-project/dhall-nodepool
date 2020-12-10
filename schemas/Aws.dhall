@@ -11,12 +11,12 @@
     , region-name : Text
     }
 , default =
-    { boot-timeout = None Natural
-    , cloud-images = None (List (./AwsCloudImage.dhall).Type)
-    , driver = "aws"
-    , hostname-format = None Text
-    , launch-retries = None Natural
-    , max-concurrency = None Natural
-    , profile-name = None Text
-    }
+  { boot-timeout = None Natural
+  , cloud-images = None (List (./AwsCloudImage.dhall).Type)
+  , driver = "aws"
+  , hostname-format = None Text
+  , launch-retries = None Natural
+  , max-concurrency = None Natural
+  , profile-name = None Text
+  }
 }

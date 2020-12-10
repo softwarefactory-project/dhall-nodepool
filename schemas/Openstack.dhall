@@ -19,21 +19,21 @@
     , region-name : Optional Text
     }
 , default =
-    { boot-timeout = None Natural
-    , clean-floating-ips = None Bool
-    , cloud-images = None (List (./OpenstackCloudImage.dhall).Type)
-    , diskimages = None (List (./OpenstackDiskimage.dhall).Type)
-    , driver = Some "openstack"
-    , hostname-format = None Text
-    , image-name-format = None Text
-    , launch-retries = None Natural
-    , launch-timeout = None Natural
-    , max-concurrency = None Natural
-    , nodepool-id = None Text
-    , pools = None (List (./OpenstackPool.dhall).Type)
-    , port-cleanup-interval = None Natural
-    , post-upload-hook = None Text
-    , rate = None Double
-    , region-name = None Text
-    }
+  { boot-timeout = None Natural
+  , clean-floating-ips = None Bool
+  , cloud-images = None (List (./OpenstackCloudImage.dhall).Type)
+  , diskimages = None (List (./OpenstackDiskimage.dhall).Type)
+  , driver = Some "openstack"
+  , hostname-format = None Text
+  , image-name-format = None Text
+  , launch-retries = None Natural
+  , launch-timeout = None Natural
+  , max-concurrency = None Natural
+  , nodepool-id = None Text
+  , pools = None (List (./OpenstackPool.dhall).Type)
+  , port-cleanup-interval = None Natural
+  , post-upload-hook = None Text
+  , rate = None Double
+  , region-name = None Text
+  }
 }

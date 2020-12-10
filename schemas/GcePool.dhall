@@ -6,8 +6,8 @@
     , use-internal-ip : Optional Bool
     }
 , default =
-    { max-servers = None Natural
-    , node-attributes = None (List { mapKey : Text, mapValue : Text })
-    , use-internal-ip = None Bool
-    }
+  { max-servers = None Natural
+  , node-attributes = None (List { mapKey : Text, mapValue : Text })
+  , use-internal-ip = None Bool
+  }
 }

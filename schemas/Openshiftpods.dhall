@@ -8,9 +8,9 @@
     , pools : List (./OpenshiftpodsPool.dhall).Type
     }
 , default =
-    { driver = "openshiftpods"
-    , launch-retries = None Natural
-    , max-concurrency = None Natural
-    , max-pods = None Natural
-    }
+  { driver = "openshiftpods"
+  , launch-retries = None Natural
+  , max-concurrency = None Natural
+  , max-pods = None Natural
+  }
 }

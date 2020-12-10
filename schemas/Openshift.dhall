@@ -8,9 +8,9 @@
     , pools : List (./OpenshiftPool.dhall).Type
     }
 , default =
-    { driver = "openshift"
-    , launch-retries = None Natural
-    , max-concurrency = None Natural
-    , max-projects = None Natural
-    }
+  { driver = "openshift"
+  , launch-retries = None Natural
+  , max-concurrency = None Natural
+  , max-projects = None Natural
+  }
 }

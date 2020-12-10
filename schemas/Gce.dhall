@@ -12,11 +12,11 @@
     , zone : Text
     }
 , default =
-    { boot-timeout = None Natural
-    , cloud-images = None (List (./GceCloudImage.dhall).Type)
-    , driver = "gce"
-    , launch-retries = None Natural
-    , max-concurrency = None Natural
-    , rate-limit = None Natural
-    }
+  { boot-timeout = None Natural
+  , cloud-images = None (List (./GceCloudImage.dhall).Type)
+  , driver = "gce"
+  , launch-retries = None Natural
+  , max-concurrency = None Natural
+  , rate-limit = None Natural
+  }
 }
