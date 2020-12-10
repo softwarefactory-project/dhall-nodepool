@@ -9,6 +9,7 @@
     , providers : List ./Providers.dhall
     , webapp : Optional (./Webapp.dhall).Type
     , zookeeper-servers : List (./ZookeeperServer.dhall).Type
+    , zookeeper-tls : Optional (./ZookeeperTls.dhall).Type
     }
 , default =
   { build-log-dir = None Text
@@ -19,5 +20,6 @@
   , max-hold-age = None Natural
   , webapp = None (./Webapp.dhall).Type
   , zookeeper-servers = [] : List (./ZookeeperServer.dhall).Type
+  , zookeeper-tls = None (./ZookeeperTls.dhall).Type
   }
 }
