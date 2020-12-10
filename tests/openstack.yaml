@@ -2,6 +2,10 @@ labels:
   - name: fake-label
     min-ready: 1
 zookeeper-servers: []
+zookeeper-tls:
+  ca: my.ca
+  cert: my.crt
+  key: my.key
 providers:
   - name: fake-provider
     cloud: fake

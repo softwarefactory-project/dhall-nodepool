@@ -7,9 +7,7 @@ so you can generate nodepool configuration from Dhall expressions.
 
 ```dhall
 {- ./examples/demo.dhall -}
-let Nodepool =
-        env:DHALL_NODEPOOL
-      ? https://softwarefactory-project.io/cgit/software-factory/dhall-nodepool/plain/package.dhall
+let Nodepool = ../package.dhall
 
 in  Nodepool.Config::{
     , providers =
@@ -30,6 +28,11 @@ in  Nodepool.Config::{
           }
       ]
     , labels = [ Nodepool.Label::{ name = "mylabel" } ]
+    , zookeeper-tls = Nodepool.ZookeeperTls::{
+      , ca = "my.ca"
+      , cert = "my.crt"
+      , key = "my.key"
+      }
     , zookeeper-servers =
       [ Nodepool.ZookeeperServer::{ host = "zk01.example.com" } ]
     }
@@ -51,5 +54,9 @@ providers:
             name: static.example.com
 zookeeper-servers:
   - host: zk01.example.com
+zookeeper-tls:
+  ca: my.ca
+  cert: my.crt
+  key: my.key
 
 ```

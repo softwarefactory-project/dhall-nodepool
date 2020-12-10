@@ -10,7 +10,7 @@
 , AwsPoolLabel =
     ./schemas/AwsPoolLabel.dhall sha256:8ffb5f5722f5169f6b61b3b953482ebdd386c17a55bb75c4df7d03dea3f1b02d
 , Config =
-    ./schemas/Config.dhall sha256:a85f478872a5ecc6dcafd32c84e84ea37bb2b94b417cdb3b761b9e64a5c7945a
+    ./schemas/Config.dhall sha256:767d0f55d8ced1164aa659e2b41c0d317e6635c8abf106245eaceb4278d52ccc
 , Diskimage =
     ./schemas/Diskimage.dhall sha256:53da1242ff6dd417534f16bd98c23dfe0814cadc6586f88db4e05cbbeaffac61
 , Gce =
@@ -63,4 +63,6 @@
     ./schemas/Webapp.dhall sha256:0e3cde952af63619172b62506a55c64b2f4ce4dce4c900b9603d79848c151f4a
 , ZookeeperServer =
     ./schemas/ZookeeperServer.dhall sha256:661ed4a88a521128cc2be47452415fcb2af3bc4584c7fb15df20725d4d06d8cb
+, ZookeeperTls =
+    ./schemas/ZookeeperTls.dhall sha256:924614423b23ea0bcd0929290961d9906362de34b0f3243e915e91589c581826
 }

@@ -1,6 +1,10 @@
 zookeeper-servers:
   - host: zookeeper_host
     port: 4242
+zookeeper-tls:
+  ca: my.ca
+  cert: my.crt
+  key: my.key
 
 labels:
   - name: openshift-project
