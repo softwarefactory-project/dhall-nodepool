@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "key": {
+        "uuid": "6724a70b_ef09f967",
+        "filename": "schemas/Config.dhall",
+        "patchSetId": 1
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 7
+      },
+      "writtenOn": "2020-12-10T20:18:28Z",
+      "side": 1,
+      "message": "I think this should now be required.",
+      "range": {
+        "startLine": 12,
+        "startChar": 22,
+        "endLine": 12,
+        "endChar": 30
+      },
+      "revId": "77dcc45f31943f0dbc9b3b073dc7c3db8531de95",
+      "serverId": "6c1dc8ef-8b94-40e4-bd83-c2359d45ecc0",
+      "unresolved": false
+    }
+  ]
+}
