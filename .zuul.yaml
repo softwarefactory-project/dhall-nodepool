@@ -1,9 +1,9 @@
 - project:
-    check:
+    check: &jobs
       jobs:
-        - dhall-diff:
-            nodeset: fedora-latest-pod
-    gate:
+        - shake-factory-test
+        - shake-factory-docs
+    gate: *jobs
+    post:
       jobs:
-        - dhall-diff:
-            nodeset: fedora-latest-pod
+        - shake-factory-publish-docs

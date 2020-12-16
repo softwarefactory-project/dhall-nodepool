@@ -6,7 +6,7 @@ so you can generate nodepool configuration from Dhall expressions.
 ## Example
 
 ```dhall
-{- ./examples/demo.dhall -}
+-- ./examples/demo.dhall
 let Nodepool = ../package.dhall
 
 in  Nodepool.Config::{
