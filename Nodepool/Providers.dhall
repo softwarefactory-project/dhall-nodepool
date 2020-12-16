@@ -1,8 +1,8 @@
-< aws : (./Aws.dhall).Type
-| gce : (./Gce.dhall).Type
-| kubernetes : (./Kubernetes.dhall).Type
-| openshift : (./Openshift.dhall).Type
-| openshiftpods : (./Openshiftpods.dhall).Type
-| openstack : (./Openstack.dhall).Type
-| static : (./Static.dhall).Type
+< aws : ./Aws/Type.dhall
+| gce : ./Gce/Type.dhall
+| kubernetes : ./Kubernetes/Type.dhall
+| openshift : ./Openshift/Type.dhall
+| openshiftpods : ./Openshiftpods/Type.dhall
+| openstack : ./Openstack/Type.dhall
+| static : ./Static/Type.dhall
 >

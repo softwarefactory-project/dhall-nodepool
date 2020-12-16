@@ -6,10 +6,10 @@ in  Nodepool.Config::{
           Nodepool.Static::{
           , name = "provider_static"
           , pools =
-            [ Nodepool.StaticPool::{
+            [ Nodepool.Static.Pool::{
               , name = "main"
               , nodes =
-                [ Nodepool.StaticPoolNode::{
+                [ Nodepool.Static.Pool.Node::{
                   , name = "static.example.com"
                   , labels = [ "mylabel" ]
                   }

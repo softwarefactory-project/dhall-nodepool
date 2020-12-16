@@ -22,7 +22,6 @@ main = shakeMain $ do
   "README.md" %> dhallReadmeAction
   "package.dhall" %> dhallTopLevelPackageAction "./Nodepool/package.dhall"
   "Nodepool//package.dhall" %> dhallPackageAction
-  "//default.dhall" %> dhallDefaultAction
   dhallDocsRules "dhall-nodepool"
   cleanRules
   test
