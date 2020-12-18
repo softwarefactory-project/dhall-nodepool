@@ -60,3 +60,11 @@ zookeeper-tls:
   key: my.key
 
 ```
+
+## Changes
+
+Frozen package are available in the tag commit.
+
+### 0.2.0
+
+- Initial release
