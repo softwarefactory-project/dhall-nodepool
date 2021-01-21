@@ -3,7 +3,7 @@
 , diskimages : Optional (List ../Diskimage/Type.dhall)
 , elements-dir : Optional Text
 , images-dir : Optional Text
-, labels : List ../Label/Type.dhall
+, labels : Optional (List ../Label/Type.dhall)
 , max-hold-age : Optional Natural
 , providers : List ../Providers.dhall
 , webapp : Optional ../Webapp/Type.dhall

@@ -18,7 +18,7 @@ in  Nodepool.Config::{
             ]
           }
       ]
-    , labels = [ Nodepool.Label::{ name = "mylabel" } ]
+    , labels = Some [ Nodepool.Label::{ name = "mylabel" } ]
     , zookeeper-tls = Nodepool.ZookeeperTls::{
       , ca = "my.ca"
       , cert = "my.crt"
