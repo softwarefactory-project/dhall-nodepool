@@ -23,5 +23,6 @@ main = shakeMain $ do
   "package.dhall" %> dhallTopLevelPackageAction "./Nodepool/package.dhall"
   "Nodepool//package.dhall" %> dhallPackageAction
   dhallDocsRules "dhall-nodepool"
+  dhallReleaseRules "./Nodepool/package.dhall"
   cleanRules
   test

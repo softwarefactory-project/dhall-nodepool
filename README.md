@@ -63,7 +63,11 @@ zookeeper-tls:
 
 ## Changes
 
-Frozen package are available in the tag commit.
+Frozen packages are available in the tag commit.
+
+### 0.3.0
+
+- Top level labels are changed to Optional
 
 ### 0.2.0
 
