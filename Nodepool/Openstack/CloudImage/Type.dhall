@@ -5,5 +5,6 @@
 , image-name : Optional Text
 , name : Optional Text
 , python-path : Optional Text
+, shell-type : Optional Text
 , username : Optional Text
 }

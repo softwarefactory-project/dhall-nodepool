@@ -5,5 +5,6 @@
 , image-name = None Text
 , name = None Text
 , python-path = None Text
+, shell-type = None Text
 , username = None Text
 }
