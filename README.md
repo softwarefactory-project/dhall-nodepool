@@ -65,6 +65,10 @@ zookeeper-tls:
 
 Frozen packages are available in the tag commit.
 
+### 0.4.0
+
+- Add Openstack.CloudImage shell-type attribute
+
 ### 0.3.0
 
 - Top level labels are changed to Optional
