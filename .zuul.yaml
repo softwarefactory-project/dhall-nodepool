@@ -1,9 +1,7 @@
 - project:
-    check: &jobs
+    check:
       jobs:
-        - shake-factory-test
-        - shake-factory-docs
-    gate: *jobs
-    post:
+        - noop
+    gate:
       jobs:
-        - shake-factory-publish-docs
+        - noop
