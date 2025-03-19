@@ -10,4 +10,5 @@
 , networks : Optional (List Text)
 , node-attributes : Optional (List { mapKey : Text, mapValue : Text })
 , security-groups : Optional (List Text)
+, priority : Optional Natural
 }

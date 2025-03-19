@@ -27,3 +27,4 @@ providers:
             diskimage: fake-image
             min-ram: 8192
             flavor-name: 'Fake'
+        priority: 100

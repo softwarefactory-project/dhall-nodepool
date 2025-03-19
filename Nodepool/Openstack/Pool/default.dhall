@@ -9,4 +9,5 @@
 , networks = None (List Text)
 , node-attributes = None (List { mapKey : Text, mapValue : Text })
 , security-groups = None (List Text)
+, priority = None Natural
 }
